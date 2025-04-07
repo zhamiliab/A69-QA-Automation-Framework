@@ -11,9 +11,9 @@ import org.testng.annotations.BeforeSuite;
 import java.time.Duration;
 import java.util.UUID;
 
-public class BaseTest {
+    public class BaseTest {
     public WebDriver driver = null;
-  public String url = "https://qa.koel.app/";
+    public String url = "https://qa.koel.app/";
 
     @BeforeSuite
     static void setupClass() {
@@ -27,7 +27,7 @@ public class BaseTest {
 
         WebDriver driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
+//        driver.manage().window().maximize();
     }
     @AfterMethod
     public void closeBrowser(){
@@ -67,7 +67,7 @@ public class BaseTest {
     }
 
     public void provideProfileName(String randomName) {
-        WebElement profileName=driver.findElement(By.cssSelector("[name='name']"));
+        WebElement profileName=driver.findElement(By.xpath("//input[@id='inputProfileName']"));
         profileName.clear();
         profileName.sendKeys(randomName);
     }
@@ -76,7 +76,7 @@ public class BaseTest {
     }
 
     public void clickSaveButton() {
-        WebElement save=driver.findElement(By.cssSelector("[button.btn-submit]"));
+        WebElement save=driver.findElement(By.xpath("//button[@class='btn-submit']"));
         save.click();
     }
 }
