@@ -8,6 +8,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
+
 import java.time.Duration;
 import java.util.UUID;
 
@@ -20,7 +21,7 @@ import java.util.UUID;
        WebDriverManager.chromedriver().setup();
     }
     @BeforeMethod
-    public void launch(){
+    public void launchBrowser(){
  //      Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -28,10 +29,6 @@ import java.util.UUID;
         WebDriver driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 //        driver.manage().window().maximize();
-    }
-    @AfterMethod
-    public void closeBrowser(){
-        driver.quit();
     }
 
     public void navigateToPage() {
@@ -78,5 +75,9 @@ import java.util.UUID;
     public void clickSaveButton() {
         WebElement save=driver.findElement(By.xpath("//button[@class='btn-submit']"));
         save.click();
+    }
+    @AfterMethod
+    public void closeBrowser(){
+        driver.quit();
     }
 }
