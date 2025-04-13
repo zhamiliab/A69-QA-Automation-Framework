@@ -4,14 +4,14 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-public class LoginTests extends BaseTest {
-    @Test(enabled = false, description = "Test has been marked as skipped due to am issue in Jira-124111")
+    public class LoginTests extends BaseTest {
+    @Test(enabled = false, description = "Test has been marked as skipped due to an issue in Jira-124111")
 
     public void loginValidEmailPassword() {
 
         navigateToPage();
-        provideEmail("dan@testpro.io");
-        providePassword("12345678");
+        provideEmail("zhamilia.begalieva@testpro.io");
+        providePassword("GaeuncKV");
         clickSubmit();
 
         Assert.assertEquals(driver.getCurrentUrl(), url); // asserting that website url stays the same
@@ -23,7 +23,7 @@ public class LoginTests extends BaseTest {
     public void loginInvalidEmailValidPassword() {
         navigateToPage();
         provideEmail("invalid@testpro.ca");
-        providePassword("12345678");
+        providePassword("GaeuncKV");
         clickSubmit();
         Assert.assertEquals(driver.getCurrentUrl(), url); // asserting that website url stays the same
 
@@ -32,7 +32,7 @@ public class LoginTests extends BaseTest {
     @Test
     public void loginValidEmailEmptyPassword() {
         navigateToPage();
-        provideEmail("dan@testpro.io");
+        provideEmail("zhamilia.begalieva@testpro.io");
         providePassword("");
         clickSubmit();
         Assert.assertEquals(driver.getCurrentUrl(), url); // asserting that website url stays the same
