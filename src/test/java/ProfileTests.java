@@ -3,18 +3,18 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class ProfileTests extends BaseTest{
+public class ProfileTests extends BaseTest {
     @Test
     public void changeProfileName() throws InterruptedException {
         navigateToPage();
 
-        provideEmail("dan@testpro.io");
-        providePassword("12345678");
+        provideEmail("zhamilia.begalieva@testpro.io");
+        providePassword("GaeuncKV");
         clickSubmit();
         Thread.sleep(2000);
         clickAvatarIcon();
         String randomName = generateRandomName();
-        provideCurrentPassword("12345678");
+        provideCurrentPassword("GaeuncKV");
         provideProfileName(randomName);
         clickSaveButton();
         Thread.sleep(2000);

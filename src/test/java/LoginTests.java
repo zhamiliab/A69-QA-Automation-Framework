@@ -4,12 +4,23 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class LoginTests extends BaseTest {
+
+    @Test(dataProvider ="IncorrectLoginData", dataProviderClass = BaseTest.class)
+    public void loginInvalidEmailValidPassword(String email, String password) {
+
+        navigateToPage();
+        provideEmail(email);
+        providePassword(password);
+        clickSubmit();
+        Assert.assertEquals(driver.getCurrentUrl(), url); // asserting that website url stays the same
+
+    }
     @Test(enabled = false, description = "Test has been marked as skipped due to am issue in Jira-124111")
     public void loginValidEmailPassword() {
 
         navigateToPage();
-        provideEmail("dan@testpro.io");
-        providePassword("12345678");
+        provideEmail("zhamilia.begalieva@testpro.io");
+        providePassword("GaeuncKV");
         clickSubmit();
 
 // error in a
@@ -19,20 +30,11 @@ public class LoginTests extends BaseTest {
 
       }
 
-    @Test(priority = 1)
-    public void loginInvalidEmailValidPassword() {
-        navigateToPage();
-        provideEmail("invalid@testpro.ca");
-        providePassword("12345678");
-        clickSubmit();
-        Assert.assertEquals(driver.getCurrentUrl(), url); // asserting that website url stays the same
-
-    }
 
     @Test
     public void loginValidEmailEmptyPassword() {
         navigateToPage();
-        provideEmail("dan@testpro.io");
+        provideEmail("zhamilia.begalieva@testpro.io");
         providePassword("");
         clickSubmit();
         Assert.assertEquals(driver.getCurrentUrl(), url); // asserting that website url stays the same
