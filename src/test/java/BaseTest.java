@@ -4,6 +4,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 import java.time.Duration;
@@ -12,6 +16,8 @@ import java.util.UUID;
 public class BaseTest {
     public WebDriver driver = null;
     public String url = "https://qa.koel.app/";
+    public WebDriverWait wait  = null;
+    public FluentWait wait1 = null;
 
     @BeforeSuite
     static void setupClass() {
@@ -28,7 +34,6 @@ public class BaseTest {
                 {"", "invalid"},
                 {"", "GaeuncKV"},
                 {"", ""},
-
         };
     }
 
@@ -37,13 +42,17 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters({"BaseURL"})
-    public void launch(String BaseURL) {
+    public void launchBrowser(String BaseURL) {
         //      Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+        wait1 = new FluentWait(driver);
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         url = BaseURL;
         navigateToPage();
     }
@@ -58,19 +67,19 @@ public class BaseTest {
     }
 
     public void provideEmail(String email) {
-        WebElement emailField = driver.findElement(By.cssSelector("[type='email']"));
+        WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='email']")));
         emailField.clear();  // so the email field should be empty after previous attempt
         emailField.sendKeys(email);
     }
 
     public void providePassword(String pass) {
-        WebElement password = driver.findElement(By.xpath("//input[@type='password']"));
+        WebElement password = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@type='password']")));
         password.clear();    // so password field should be empty after prev. attempt
         password.sendKeys(pass);
     }
 
     public void clickSubmit() {
-        WebElement submit = driver.findElement(By.cssSelector("[type='submit']"));
+        WebElement submit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='submit']")));
         submit.click();
     }
 
@@ -82,7 +91,6 @@ public class BaseTest {
     public void provideCurrentPassword(String currPass) {
         WebElement currentPass = driver.findElement(By.xpath("//input[@id='inputProfileCurrentPassword']"));
         currentPass.sendKeys(currPass);
-
     }
 
     public void provideProfileName(String randomName) {
