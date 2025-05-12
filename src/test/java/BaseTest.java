@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -17,6 +18,7 @@ public class BaseTest {
     public WebDriver driver = null;
     public String url = "https://qa.koel.app/";
     public WebDriverWait wait  = null;
+    public Actions actions = null;
     public FluentWait wait1 = null;
 
     @BeforeSuite
@@ -37,7 +39,7 @@ public class BaseTest {
         };
     }
 
-    ;
+
 
 
     @BeforeMethod
@@ -53,6 +55,7 @@ public class BaseTest {
         wait1 = new FluentWait(driver);
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        actions = new Actions(driver);
         url = BaseURL;
         navigateToPage();
     }

@@ -12,6 +12,9 @@
                 </methods>
             </class>
             <class name="ProfileTests"/>
+            <class name="ContextClick"/>
+            <class name="Hover"/>
+            <class name="countPlaylistSongs"/>
         </classes>
     </test>
 </suite>
