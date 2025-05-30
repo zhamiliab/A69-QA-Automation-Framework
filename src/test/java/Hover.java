@@ -3,13 +3,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.LoginPage;
 
 public class Hover extends BaseTest {
     @Test
     public void hoverOverPlayButton() {
-        provideEmail("zhamilia.begalieva@testpro.io");
-        providePassword("GaeuncKV");
-        clickSubmit();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("zhamilia.begalieva@testpro.io","GaeuncKV");
+
         Assert.assertTrue(hoverPlay().isDisplayed());
     }
 

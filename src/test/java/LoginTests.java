@@ -2,43 +2,45 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.LoginPage;
 
 public class LoginTests extends BaseTest {
 
     @Test(dataProvider ="IncorrectLoginData", dataProviderClass = BaseTest.class)
     public void loginInvalidEmailValidPassword(String email, String password) {
+        LoginPage loginPage = new LoginPage(driver);
 
         navigateToPage();
-        provideEmail(email);
-        providePassword(password);
-        clickSubmit();
+        loginPage.provideEmail(email);
+        loginPage.providePassword(password);
+        loginPage.clickSubmit();
+
         Assert.assertEquals(driver.getCurrentUrl(), url); // asserting that website url stays the same
 
     }
     @Test(enabled = false, description = "Test has been marked as skipped due to am issue in Jira-124111")
     public void loginValidEmailPassword() {
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+//        navigateToPage();
+        loginPage.login("zhamilia.begalieva@testpro.io","GaeuncKV");
 
-        navigateToPage();
-        provideEmail("zhamilia.begalieva@testpro.io");
-        providePassword("GaeuncKV");
-        clickSubmit();
 
-// error in a
       Assert.assertEquals(driver.getCurrentUrl(), url); // asserting that website url stays the same
-        WebElement avatarIcon = driver.findElement(By.xpath("//img[@class='avatar']"));
-        Assert.assertTrue(avatarIcon.isDisplayed());
+
+        Assert.assertTrue(homePage.isAvatarDisplayed());
 
       }
 
 
     @Test
     public void loginValidEmailEmptyPassword() {
-        navigateToPage();
-        provideEmail("zhamilia.begalieva@testpro.io");
-        providePassword("");
-        clickSubmit();
-        Assert.assertEquals(driver.getCurrentUrl(), url); // asserting that website url stays the same
+        LoginPage loginPage = new LoginPage(driver);
+//        navigateToPage();
+        loginPage.login("zhamilia.begalieva@testpro.io","");
 
+        Assert.assertTrue(loginPage.isSubmitButtonDisplayed());
     }
 
 }

@@ -15,6 +15,7 @@
             <class name="ContextClick"/>
             <class name="Hover"/>
             <class name="countPlaylistSongs"/>
+<!--            <class name="PlaylistTests"/>-->
         </classes>
     </test>
 </suite>

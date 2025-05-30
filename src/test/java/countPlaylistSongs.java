@@ -3,6 +3,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.LoginPage;
 
 import java.util.List;
 
@@ -10,9 +11,9 @@ import java.util.List;
 public class countPlaylistSongs extends BaseTest {
     @Test
     public void countPlaylistSongs() {
-        provideEmail("zhamilia.begalieva@testpro.io");
-        providePassword("GaeuncKV");
-        clickSubmit();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("zhamilia.begalieva@testpro.io","GaeuncKV");
+
         choosePlaylistByName("uniquePlaylist");
         displayAllSongs();
         Assert.assertTrue(getPlaylistDetails().contains(String.valueOf(countSongs())));
